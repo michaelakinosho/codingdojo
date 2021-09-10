@@ -1,0 +1,47 @@
+1)
+None	None
+
+2)
+result	hello()
+result	15
+
+3)
+result	numPlus(3)
+result	18
+
+4)
+num	15
+result	logAndReturn(10)
+result	10
+num	15
+
+5)
+num	15
+result	timesTwo(10)
+result	20
+num	15
+
+6)
+result	timesTwoAgain(3) + timesTwoAgain(5)
+y	6
+y	10
+result	16
+
+7)
+
+8)
+
+9)
+result	sumNums(2,3) + sumNums(3,5)
+sum	5
+sum	8
+result	13
+
+10)
+sum is 5
+sum is 3
+sum is 6
+sum is 3
+sum is 5
+sum is 8
+result is 19
