@@ -1,0 +1,9 @@
+auntContactInfo ["Paula","Smith","1234 Main Street", "St. Louis", "MO", 12345]
+
+produce ["apples","oranges"]
+frozen ["broccoli","ice cream"]
+frozen ["broccoli","ice cream","hashbrowns"]
+
+movieLibrary = ["Bambi","E.T.","Toy Story"]
+movieLibrary = ["Bambi","E.T.","Toy Story","Zoro"]
+movieLibrary = ["Bambi","Beetlejuice","Toy Story","Zoro"]
