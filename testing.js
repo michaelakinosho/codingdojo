@@ -1,5 +1,7 @@
-var myStringVariable = "My name is Jeff!";
-console.log(myStringVariable); // My name is Jeff!
-
-var tested = 24;
-console.log(tested);
+var number = '';
+var x = 5;
+while (x<10){
+    number += x;
+    x++;
+}
+console.log(number);

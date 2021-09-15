@@ -1,0 +1,215 @@
+<html>
+<head>
+    <title>NinjaMan</title>
+    <style type="text/css">
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        .row{
+            line-height: 0;
+        }
+        .wall {
+            background-color: blue;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+
+        }
+        .sushi {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/sushi.png');
+            background-size: contain;
+
+        }
+        .onigiri {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/onigiri.png');
+            background-size: contain;
+
+        }
+        .blank {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+
+        }
+        #ninjaman {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/ninja.gif');
+            background-size: contain;
+            position: absolute;
+            left: 40px;
+            top: 40px;
+        }
+        #bluey {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/bluey.gif');
+            background-size: contain;
+            position: absolute;
+        }
+        #pinky {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/pinky.gif');
+            background-size: contain;
+            position: absolute;
+        }
+        #pumpky {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/pumpky.gif');
+            background-size: contain;
+            position: absolute;
+        }
+        #red {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/red.gif');
+            background-size: contain;
+            position: absolute;
+        }
+        #scaredy {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('img/scaredy.png');
+            background-size: contain;
+            position: absolute;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id='world'></div>
+    <div id='ninjaman'></div>
+
+</body>
+<script type="text/javascript">
+    
+    var world = [];
+    function initializeworld(){
+        var dim = Math.floor(Math.random() * 5) + 5;
+        for (var row = 0; row < dim; row++){    //Creates the walls
+            var temparray = [];
+            for (var col = 0; col < dim; col++){
+                if(row == 0 || row == dim-1){
+                    temparray.push(1);
+                } else if(col == 0 || col == dim-1){
+                    temparray.push(1);
+                } else if(row % 2 == 0 && col % 2 == 0) {
+                    temparray.push(1);
+                } 
+                else {temparray.push(0);}
+            }
+            world.push(temparray);
+        }
+        for(var row = 1; row < world.length-1; row++){
+            for(var col = 1; col < world.length-1; col++){
+                if(world[row][col] != 1){
+                    world[row][col] = Math.floor(Math.random() * 2) + 2;
+                }
+            }
+        }
+
+    }
+    initializeworld()
+    console.log(world);
+
+    var worldDict = {
+        0:'blank',
+        1:'wall',
+        2:'sushi',
+        3:'onigiri'
+    }
+
+    var score = 0;
+
+    function drawWorld(){
+        output = "";
+        for (var row = 0; row < world.length; row++){
+            output += "<div class = 'row'>"
+            for (var x = 0; x < world[row].length; x++){
+                output += "<div class = '" + worldDict[world[row][x]] + "'></div>"
+                //console.log("element: ", worldDict[world[row][x]])
+            }
+            output += "</div>"
+        }
+    
+        document.getElementById('world').innerHTML = output;
+    }
+    drawWorld()
+    
+    function addGhosts(){
+
+    }
+
+    var ninjaman = {
+        x:1,
+        y:1
+    }
+
+    function drawNinjaman(){
+        document.getElementById('ninjaman').style.top = ninjaman.y * 40 + 'px'
+        document.getElementById('ninjaman').style.left = ninjaman.x * 40 + 'px'
+    }
+    drawNinjaman()
+
+    document.ontimeupdate
+
+    document.onkeydown = function(e){
+        if(e.keyCode == 37){     //On left arrow press attempt to move left
+            if(world[ninjaman.y][ninjaman.x - 1] != 1){
+                ninjaman.x--;   //Okay to move left
+            }
+        }
+        if(e.keyCode == 39){    //On right arrow press attempt to move right
+            if(world[ninjaman.y][ninjaman.x + 1] != 1){
+                ninjaman.x++;   //Okay to move right
+            }
+        }
+        if(e.keyCode == 38){    //On up arrow press attempt to move up
+            if(world[ninjaman.y - 1][ninjaman.x] != 1){
+                ninjaman.y--;   //Okay to move up
+            }
+        }
+        if(e.keyCode == 40){    //On down arrow press attempt to move down
+            if(world[ninjaman.y + 1][ninjaman.x] != 1){
+                ninjaman.y++;   //Okay to move down
+            }
+        }
+        
+        if (world[ninjaman.y][ninjaman.x] == 2){
+            score += 10;
+        } else if (world[ninjaman.y][ninjaman.x] == 3){
+            score += 5;
+        }
+        console.log("points: ", score);
+        world[ninjaman.y][ninjaman.x] = 0;
+        drawNinjaman()
+        drawWorld()
+    }
+
+</script>
+</html>
