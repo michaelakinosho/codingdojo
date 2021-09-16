@@ -1,14 +1,16 @@
 <html>
 <head>
     <title>NinjaMan</title>
+    
     <style type="text/css">
         * {
             margin:0;
             padding:0;
         }
-
+        
         .row{
             line-height: 0;
+            
         }
         .wall {
             background-color: blue;
@@ -40,7 +42,6 @@
             height: 40px;
             width: 40px;
             display: inline-block;
-
         }
         #ninjaman {
             background-color: black;
@@ -53,64 +54,30 @@
             left: 40px;
             top: 40px;
         }
-        #bluey {
-            background-color: black;
-            height: 40px;
-            width: 40px;
-            display: inline-block;
-            background-image: url('img/bluey.gif');
-            background-size: contain;
-            position: absolute;
+        #playerLives{
+            color: red;
+            
         }
-        #pinky {
-            background-color: black;
-            height: 40px;
-            width: 40px;
-            display: inline-block;
-            background-image: url('img/pinky.gif');
-            background-size: contain;
-            position: absolute;
-        }
-        #pumpky {
-            background-color: black;
-            height: 40px;
-            width: 40px;
-            display: inline-block;
-            background-image: url('img/pumpky.gif');
-            background-size: contain;
-            position: absolute;
-        }
-        #red {
-            background-color: black;
-            height: 40px;
-            width: 40px;
-            display: inline-block;
-            background-image: url('img/red.gif');
-            background-size: contain;
-            position: absolute;
-        }
-        #scaredy {
-            background-color: black;
-            height: 40px;
-            width: 40px;
-            display: inline-block;
-            background-image: url('img/scaredy.png');
-            background-size: contain;
-            position: absolute;
-        }
+        
     
     </style>
 </head>
 <body>
     <div id='world'></div>
     <div id='ninjaman'></div>
+    <h1>Welcome to the NinjaMan Game</h1>
+    <h3 id="maxPoints">Highest possible points: </h3>
+    <h3 id="playerPoints">Player 1 points:</h3>
+    <h3 id="playerLives">Number of lives remaining: </h3>
+    <h1 id="gameStatus"></h1>
 
 </body>
 <script type="text/javascript">
     
     var world = [];
+    var maxPoints = 0;
     function initializeworld(){
-        var dim = Math.floor(Math.random() * 5) + 5;
+        var dim = Math.floor(Math.random() * 10) + 5;
         for (var row = 0; row < dim; row++){    //Creates the walls
             var temparray = [];
             for (var col = 0; col < dim; col++){
@@ -132,8 +99,19 @@
                 }
             }
         }
-
+        for (var i = 1; i < world.length - 1; i++){
+            for (var j = 1; j < world.length -1; j++){
+                if(world[i][j] == 2){
+                    maxPoints += 10     //Sushi earns 10 points
+                } else if (world[i][j] == 3) {
+                    maxPoints += 5      //Onigiri earns 5 points
+                }
+            }
+        }
+        document.getElementById("maxPoints").innerHTML = "Highest possible points: " + maxPoints;
     }
+
+    
     initializeworld()
     console.log(world);
 
@@ -145,6 +123,8 @@
     }
 
     var score = 0;
+    var playerLives = 3;
+    var gameStatus = true;
 
     function drawWorld(){
         output = "";
@@ -158,17 +138,60 @@
         }
     
         document.getElementById('world').innerHTML = output;
+        document.getElementById('playerPoints').innerHTML = "Player 1 points: " + score;
+        document.getElementById('playerLives').innerHTML = "Number of lives remaining: " + playerLives;
+
+        if (score == maxPoints) {
+            gameStatus = false;
+            document.getElementById('gameStatus').innerHTML = "You won!! Game Over.";
+            clearInterval(myVar);
+
+            clearInterval(myVar2);
+        }
     }
     drawWorld()
     
+    var ghostDict = [
+        'bluey',
+        'pinky',
+        'pumpky',
+        'red',
+        'scaredy',
+    ]
+
+    var arrayGhost = [];
     function addGhosts(){
+        output = "";
+        for (var i = 0;i < world.length - 4; i++){
+            randrow = Math.floor(Math.random() * world.length) + 0;
+            randcol = Math.floor(Math.random() * world.length) + 0;
+            if(randrow == 1 && randcol == 1){
+                randrow = 0;
+                randcol = 0;
+            }
+            if (arrayGhost.length < ghostDict.length){
+                arrayGhost.push([ghostDict[i],randrow,randcol]);
+
+                let div = document.createElement('div');
+		        div.id = ghostDict[i];
+		        div.style = 'position:absolute; top:' + randrow * 40 + 'px; left:' +  + randcol * 40 + 'px; width:40px; height:40px; display: inline; background-size: contain; background-image: url("img/' + ghostDict[i] + '.gif");';
+                'div.style = position:absolute; top:0px; left:0px; background-image: url("img/down1.png"); width:59px; height:86px;'
+		        document.body.append(div);
+
+            } else { break } //Break the For loop an don't add undefined items to the array once limit of Ghost is reached
+
+        }
+        
+        console.log(arrayGhost);
 
     }
+    addGhosts();
 
     var ninjaman = {
         x:1,
         y:1
     }
+
 
     function drawNinjaman(){
         document.getElementById('ninjaman').style.top = ninjaman.y * 40 + 'px'
@@ -176,27 +199,70 @@
     }
     drawNinjaman()
 
-    document.ontimeupdate
+    let myVar = setInterval(drawGhost,1000);
+    let myVar2 = setInterval(touchGhost,250);
 
+    function drawGhost(){
+        for (var i = 0; i < arrayGhost.length; i++){
+            var randGhost = Math.floor(Math.random() * (1 - (-1) + 1) ) + (-1); //If step is forward a positive one, backward negative one or zero stands still
+            var randDirect = Math.floor(Math.random() * 2) + 0;     //If direction is top to bottom or left to right
+            if (randDirect == 1){
+                if(arrayGhost[i][1] + randGhost > world.length - 1){
+                    arrayGhost[i][1] = 0;
+                } else if (arrayGhost[i][1] + randGhost < 0){
+                    arrayGhost[i][1] = world.length - 1;
+                } else {arrayGhost[i][1] += randGhost;}
+            } else {
+                if(arrayGhost[i][2] + randGhost > world.length - 1){
+                    arrayGhost[i][2] = 0;
+                } else if (arrayGhost[i][2] + randGhost < 0){
+                    arrayGhost[i][2] = world.length - 1;
+                } else {arrayGhost[i][2] += randGhost;}
+            }
+            
+            document.getElementById(arrayGhost[i][0]).style.top = (arrayGhost[i][1]) * 40 + 'px'
+            document.getElementById(arrayGhost[i][0]).style.left = (arrayGhost[i][2]) * 40 + 'px'
+            //console.log(Date.now())
+            
+        }
+    }
+
+    function touchGhost(){
+        for (var i = 0; i < arrayGhost.length - 1; i++){
+            if(ninjaman.y == arrayGhost[i][1] && ninjaman.x == arrayGhost[i][2]){
+                playerLives--;
+                document.getElementById('playerLives').innerHTML = "Number of lives remaining: " + playerLives;
+            }
+        }
+        if (playerLives < 1){
+            gameStatus = false;
+            document.getElementById('gameStatus').innerHTML = "Sorry you lost, play again?"
+            clearInterval(myVar)
+            clearInterval(myVar2)
+        }
+    }
+    
     document.onkeydown = function(e){
-        if(e.keyCode == 37){     //On left arrow press attempt to move left
-            if(world[ninjaman.y][ninjaman.x - 1] != 1){
-                ninjaman.x--;   //Okay to move left
+        if (gameStatus == true){
+            if(e.keyCode == 37){     //On left arrow press attempt to move left
+                if(world[ninjaman.y][ninjaman.x - 1] != 1){
+                    ninjaman.x--;   //Okay to move left
+                }
             }
-        }
-        if(e.keyCode == 39){    //On right arrow press attempt to move right
-            if(world[ninjaman.y][ninjaman.x + 1] != 1){
-                ninjaman.x++;   //Okay to move right
+            if(e.keyCode == 39){    //On right arrow press attempt to move right
+                if(world[ninjaman.y][ninjaman.x + 1] != 1){
+                    ninjaman.x++;   //Okay to move right
+                }
             }
-        }
-        if(e.keyCode == 38){    //On up arrow press attempt to move up
-            if(world[ninjaman.y - 1][ninjaman.x] != 1){
-                ninjaman.y--;   //Okay to move up
+            if(e.keyCode == 38){    //On up arrow press attempt to move up
+                if(world[ninjaman.y - 1][ninjaman.x] != 1){
+                    ninjaman.y--;   //Okay to move up
+                }
             }
-        }
-        if(e.keyCode == 40){    //On down arrow press attempt to move down
-            if(world[ninjaman.y + 1][ninjaman.x] != 1){
-                ninjaman.y++;   //Okay to move down
+            if(e.keyCode == 40){    //On down arrow press attempt to move down
+                if(world[ninjaman.y + 1][ninjaman.x] != 1){
+                    ninjaman.y++;   //Okay to move down
+                }
             }
         }
         
@@ -205,6 +271,8 @@
         } else if (world[ninjaman.y][ninjaman.x] == 3){
             score += 5;
         }
+
+
         console.log("points: ", score);
         world[ninjaman.y][ninjaman.x] = 0;
         drawNinjaman()
