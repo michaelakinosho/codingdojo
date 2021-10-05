@@ -1,0 +1,24 @@
+* {
+    font-family: cursive;
+}
+h1 {
+    color:white;
+    background-color:black;
+    text-align: left;
+    font-weight:bold;
+}
+
+h2 {
+    color: white;
+    background-color: purple;
+    text-align: center;
+    font-style: italic;
+    font-weight: normal;
+}
+
+h3 {
+    color: black;
+    background: rgb(0, 204, 255);
+    text-align: right;
+    text-decoration: underline;
+}
