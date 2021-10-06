@@ -1,0 +1,33 @@
+h1 {
+    text-align: center;
+    font-size:50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#octocat>* {
+    padding: 15px;
+    margin: 10px;
+}
+#octocat>*>img {
+    height: 200px;
+    width: 200px;
+}
+#row_one {
+    background-color: darkseagreen;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#row_two {
+    background-color:rebeccapurple;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+#row_three {
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
