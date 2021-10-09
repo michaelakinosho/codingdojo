@@ -1,0 +1,39 @@
+.nav {
+    display: flex;
+    color: white;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-family: Roboto, sans-serif;
+}
+.nav-links {
+    display: flex;
+    justify-content: space-evenly;
+    width:450px;
+    list-style: none;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: white;
+    background-color: transparent;
+  }
+  
+  a:visited {
+    color: pink;
+    background-color: transparent;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+  }
+  
+  a:active {
+    color: yellow;
+    background-color: transparent;
+  }
