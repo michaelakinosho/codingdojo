@@ -1,0 +1,168 @@
+
+.nav {
+    display: flex;
+    color: white;
+    background-color: black;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    font-family: Roboto, sans-serif;
+}
+.nav-links {
+    display: flex;
+    justify-content: space-evenly;
+    width:450px;
+    list-style: none;
+    text-decoration: none;
+}
+.nav-items>a:link {
+    color: white;
+}
+#nav-btn {
+    display: flex;
+    padding-left: 120px;
+}
+.main {
+    width: 755px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 20px;
+    
+}
+.main1, .main2 {
+    width: 500px;
+    background-color: white;
+    margin: 10px;
+    border: black;
+    border-style: solid;
+}
+.main3, .main4 {
+    width: 250px;
+    background-color: white;
+    margin: 10px;
+    border: black;
+    border-style: solid;
+}
+.main2>.container{
+    height: 60px;
+}
+.container {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 200px;
+}
+.container2 {
+    padding: 10px;
+}
+.top-bar {
+    height: 100px;
+    background-color: green;
+}
+.top-bar2 {
+    padding: 10px;
+    background-color: grey;
+    font-size: 20px;
+    font-weight: bold;
+}
+#timeline {
+    color: darkgrey;
+}
+
+.top-bar3, .top-bar4 {
+    background-color: grey;
+    font-size: 20px;
+    font-weight: bold;
+    width: 250px;
+}
+a {
+    text-decoration: underline;
+}
+.nav-items>a {
+    text-decoration: none;
+}
+a:link {
+    color: black;
+    background-color: transparent;
+  }
+  
+  a:visited {
+    color: pink;
+    background-color: transparent;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+  }
+  
+  a:active {
+    color: yellow;
+    background-color: transparent;
+  }
+  .container>img {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 150px;
+    height: 150px;
+    border: 2px transparent white;
+    border-radius: 15px;
+    
+  }
+  .userloc {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  img {
+    height: 20px;
+    width: 20px;
+    padding-right: 10px;
+    border: 2px transparent white;
+    border-radius: 15px;
+  }
+  table>tbody>tr {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+  }
+  table>tbody>tr>td>p {
+    padding-right: 30px;
+}
+table>tbody>tr>td>a {
+    padding-right: 15px;
+}
+  #userskills {
+    width: 250px;
+    display: flex;
+    text-overflow: wrap;
+  }
+  .profileLink>a>img {
+    width: 20px;
+    height: 20px;
+    padding-right: 10px;
+  }
+  #count {
+    color: white;
+    border: 2px solid lightgreen;
+    border-radius: 50%;
+    width: 20px;
+    text-align: center;
+    background-color:lightgreen;
+    padding-right: 20px;
+  }
+  #count2 {
+    color: white;
+    border: 2px solid lightgreen;
+    border-radius: 50%;
+    width: 40px;
+    text-align: center;
+    background-color:lightgreen;
+  }
+  .view-more {
+    border: 2px solid;
+    padding: 10px;
+  }
