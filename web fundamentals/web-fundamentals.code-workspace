@@ -1,43 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "week 1\\plotting_our_blocks"
+			"path": "."
 		},
 		{
-			"path": "week 1\\button_up"
-		},
-		{
-			"path": "week 1\\styling"
-		},
-		{
-			"path": "week 2\\flex_our_blocks"
-		},
-		{
-			"path": "week 2\\github_blocks"
-		},
-		{
-			"path": "week 2\\flex_navbar"
-		},
-		{
-			"path": "week 2\\flex_ible_columns"
-		},
-		{
-			"path": "week 2\\position_basics"
-		},
-		{
-			"path": "week 2\\user_card"
-		},
-		{
-			"path": "week 1\\portfolio_content"
-		},
-		{
-			"path": "week 2\\profile_page"
-		},
-		{
-			"path": "week 2\\CSS_library"
-		},
-		{
-			"path": "week 3\\button_clicker"
+			"path": "..\\Data-Science"
 		}
 	],
 	"settings": {}
