@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Profile</title>
+    <title>Dojonary</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
 
 </head>
 <body>
+    <div class="nav">
+        <h1 class="nav-title">Dojonary</h1>
+        <div id="search">
+            <input type="text" name="search" 
+                placeholder="Search" style="width:250px" >
+        </div>
+        <div id="nav-btn">
+            <button class="btn" onclick="login(this)">Login</button>
+        </div>
+    </div>
+    <div class="main">
+        <div class="sub_main1">
+            <div class="container1">
+                <div class="col1">
+                    <h2 id="wordname">ninja</h2>
+                    <p id="partofspeech">noun</p>
+                    <p id="pluralform">Plural: <em>ninjas</em></p>
+                    <div id="likes-btn">
+                        <button class="likes-btn" onclick="likes_btn(this)">2 likes</button>
+                    </div>
+                </div>
+                <div class="col2">
+                    <p>A practitioner skilled in the <a href="#"> Japanese</a> art of <a href="#">ninjutsu</a></p>
+                </div>
+            </div>
+            <div class="container1">
+                <div class="col1">
+                    <h2 id="wordname">ninja</h2>
+                    <p id="partofspeech">noun</p>
+                    <p id="pluralform">Plural: <em>ninjas</em></p>
+                    <div id="likes-btn">
+                        <button class="likes-btn" onclick="likes_btn(this)">21 likes</button>
+                    </div>
+                </div>
+                <div class="col2">
+                    <p>A <a href="#">programmer</a> who breaks down problems with <a href="#">zen</a>-like focus</p>
+
+                </div>
+            </div>
+            <div class="container1">
+                <div class="col1">
+                    <h2 id="wordname">ninja</h2>
+                    <p id="partofspeech">noun</p>
+                    <p id="pluralform">Plural: <em>ninjas</em></p>
+                    <div id="likes-btn">
+                        <button class="likes-btn" onclick="likes_btn(this)">32 likes</button>
+                    </div>
+                </div>
+                <div class="col2">
+                    <p>An alum of the Coding Dojo program and shares their knowledge</p>
+                </div>
+            </div>
+            <div class="container1">
+                <div class="col1">
+                    <h2 id="wordname">ninja</h2>
+                    <p id="partofspeech">noun</p>
+                    <p id="pluralform">Plural: <em>ninjas</em></p>
+                    <div id="likes-btn">
+                        <button class="likes-btn" onclick="likes_btn(this)">43 likes</button>
+                    </div>
+                </div>
+                <div class="col2">
+                    <p>What a Coding Dojo cohort inspires to be upon completion of course</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="sub_main2">
+            <div class="container2">
+                <div class="col1">
+                    <h2>Dojonary is defined by YOU</h2>
+                    <div id="add-definition-btn">
+                        <button class="add-definition-btn" onclick="add_definition(this)">Add Definition</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

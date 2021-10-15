@@ -1,0 +1,94 @@
+* {
+    font-family: cursive;
+    border-radius: 5px;
+    margin: 0px;
+}
+.nav {
+    display: flex;
+    color: black;
+    background-color: grey;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: cursive;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 20px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: auto;
+}
+input[name=search] {
+    border: 2px solid black;
+}
+.btn {
+    background-color: blue;
+    color: white;
+    border: 2px solid black;
+    box-shadow: 2px 2px black;
+}
+.likes-btn {
+    background-color: rgba(231, 231, 15, 0.842);
+}
+.add-definition-btn {
+    background-color: darkseagreen;
+}
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    padding: 0px;
+    width: auto;
+    height: auto;
+    margin: 2px;
+}
+.sub_main1, .sub_main2 {
+    width:max-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.sub_main1 {
+    width:530px;
+}
+.sub_main2 {
+    height: max-content;
+}
+.container1, .container2 {
+    border: 2px solid black;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+.container1 {
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+.container1>.col1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    padding-right: 15px;
+}
+.container2 {
+    width: auto;
+    height: auto;
+}
+.container2>.col1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+}
+#wordname {
+    margin: 0px;
+}
+#partofspeech {
+    font-style: italic;
+}
