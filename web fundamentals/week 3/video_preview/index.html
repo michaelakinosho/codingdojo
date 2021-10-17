@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoLab</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- top navigation -->
+    <div class="top">
+        <div class="nav-container">
+            <h1>VideoLab</h1>
+            <input type="text" placeholder="Search" name="query" class="search">
+            <button class="btn">Login</button>
+        </div>
+    </div>
+
+    <!-- main content -->
+    
+    <div class="flex-container">
+
+        <!-- left column -->
+        <div class="col-l">
+
+            <!-- this is a placeholder replace it with a real video -->
+            <video id="video1" controls muted loop onmouseover="onMouseHover(this)">
+                <source src="assets/distorted-reflections-of-a-lake-surrounding-on-its-water-surface-3230808.mp4" type="video/mp4">
+            </video>
+
+            <!-- video info -->
+            <div class="row">
+                <div class="start">
+                    <h1 >Distorted Reflections Of A Lake Surrounding On Its Water Surface</h1>
+                    <h3>1.2M Views | Uploaded November 16, 2019</h3>
+                    <div class="user">
+                        <img id="user-bio-pic" src="assets/distorted-reflections-of-a-lake-surrounding-on-its-water-surface-3230808.jpg" width="50px" height="50px" onclick="onClick(this)"><span class="user-name">Ambient_Nature</span><span class="tooltiptext">Click to enlarge image</span>
+                        
+                        <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+                            <img class="w3-modal-content" id="img01" style="width:60%">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn">Subscribe</button>
+            </div>
+
+        </div>
+
+        <!-- right column -->
+        <div class="col-r">
+
+            <h3 class="sub-header">Up Next</h3>
+
+            <div class="video-small">
+                <video id="video2" muted loop onmouseover="onMouseHover(this)" onmouseleave="onMouseLeave(this)" onclick="onClickPlayNext(this, 0)">
+                    <source src="assets/playful-pomeranian-dogs-behind-wooden-fence-6588292.mp4" type="video/mp4">
+                </video>
+                <span class="video-title">Playful Pomeranian Dogs</span>
+            </div>
+
+            <div class="video-small">
+                <video id="video3" muted loop onmouseover="onMouseHover(this)" onmouseleave="onMouseLeave(this)" onclick="onClickPlayNext(this, 0)">
+                    <source src="assets/the-niagara-falls-in-a-close-up-video-5946371.mp4" type="video/mp4">
+                </video>
+                <span class="video-title">The Niagara Falls</span>
+            </div>
+
+            <div class="video-small">
+                <video id="video4" muted loop onmouseover="onMouseHover(this)" onmouseleave="onMouseLeave(this)" onclick="onClickPlayNext(this, 0)">
+                    <source src="assets/watching-rain-on-the-road-in-worm-s-eye-view-3343679.mp4" type="video/mp4">
+                </video>
+                <span class="video-title">Watching Rain</span>
+            </div>
+
+            <div class="video-small">
+                <video id="video5" muted loop onmouseover="onMouseHover(this)" onmouseleave="onMouseLeave(this)" onclick="onClickPlayNext(this, 0)">
+                    <source src="assets/wind-chime-hanging-on-a-tree-1578318.mp4" type="video/mp4">
+                </video>
+                <span class="video-title">Wind Chimes Hanging</span>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
