@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="nav">
+        <h1 class="nav-title">Profile</h1>
+        <ul class="nav-links">
+            <li class="nav-items"><a href="#">Home</a></li>
+            <li class="nav-items"><a href="#" class="active">My Profile</a></li>
+            <li class="nav-items"><a href="#">Find Connections</a></li>
+        </ul>
+        <div id="nav-btn">
+            <button class="btn">Sign Out</button>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="main1">
+            <div class="container">
+                <div class="top-bar"></div>
+                <img src="images/arry-s.jpg" alt="user pic">
+            </div>
+            <div class="container2">
+                <h1 id="ProfileName">Arry S</h1>
+                <div class="userloc">
+                    <img src="images/map-marker.png" alt="Map marker pic">
+                    <p>Chicago</p>
+                </div>
+            <div id="userskills">
+                <p>Developer | Problem Solver | Collaborator | Python and SQL User</p>
+            </div>
+            <div class="profileLink">
+                <a href="#" onclick="onClickChangeName('ProfileName')"><img src="images/gear.png" alt="gear pic">edit profile</a>
+            </div>
+            </div>
+        </div>
+        
+        <div class="main2">
+            <div class="container">
+                <div class="top-bar2">Education
+                </div>
+            </div>
+            <div class="container2">
+                <h2>Coding Dojo - Full Stack Bootcamp</h2>
+                <h3 id="timeline">Sep 2021 - Feb 2022</h3>
+                <p id="edu_coms">Truly working for black belts in Web Fundamentals and Python. Truly working for black belts in Web Fundamentals and Python. Truly working for black belts in Web Fundamentals and Python.</p>
+            </div>
+        </div>
+
+        <div class="main3">
+                <div class="top-bar3">
+                    <div id="requests_count" class="count">2</div>
+                    <div class="count_desc">Connection Requests</div>
+                </div>
+            <div class="container2">
+                <div class="userloc">
+                    <table>
+                        <tbody>
+                            <tr id="first_req">
+                                <td><a href="#"><img src="images/adrien-s.jpg" alt="person pic"></a></td>
+                                <td><a href="#">Adrien S</a></td>
+                                <td><img class="accept" src="icons/accept-circle.png" alt="accept circle pic" onclick="onClickAccept('requests_count','connects_count','first_req')"></td>
+                                <td><img class="close" src="icons/close-circle.png" alt="close circle pic" onclick="onClickClose('requests_count','first_req')"></td>
+                            </tr>
+                            <tr id="second_req">
+                                <td><a href="#"><img src="images/alayne-s.jpg" alt="Map marker pic"></a></td>
+                                <td><a href="#">Alayne S</a></td>
+                                <td><img class="accept" src="icons/accept-circle.png" alt="accept circle pic" onclick="onClickAccept('requests_count','connects_count','second_req')"></td>
+                                <td><img class="close" src="icons/close-circle.png" alt="close circle pic" onclick="onClickClose('requests_count','second_req')"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="main4">
+            <div class="top-bar3">
+                <div id="connects_count" class="count">500</div>
+                <div class="count_desc">Your Connections</div>
+            </div>
+            <div class="container2">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a href="#"><img src="images/adrien-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Adrien S</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/alayne-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Alayne S</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/anne-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Anne S</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/arry-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Arry S</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/jane-m.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Jane M</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/phil-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Phil S</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#"><img src="images/todd-s.jpg" alt="person pic"></a></td>
+                            <td><a href="#">Todd S</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="view-more">
+                <a href="#">View more</a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
