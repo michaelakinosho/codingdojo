@@ -1,3 +1,7 @@
+"""
+Author: Michael Akinosho
+Date: October 29, 2021
+"""
 class User:
     #class attribute defined at the class level
     bank_name = 'First National Dojo'

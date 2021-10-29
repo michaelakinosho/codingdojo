@@ -1,3 +1,9 @@
+"""
+Author: Michael Akinosho
+Date: October 29, 2021
+Test units are available below and are commmented out
+class User is imported by Users_with_BankAccounts
+"""
 class User:
     #class attribute defined at the class level
     bank_name = 'First National Dojo'
@@ -27,6 +33,9 @@ class User:
         print("Respective balances after transfer:")
         self.display_user_balance(), other_user.display_user_balance()
 
+#Please remove block comments to run as standalone file
+#Thanks!!
+"""
 #Creating three instances of user        
 mj = User("Michael Jordan","mj@mj.com")
 kb = User("Kobe Bryant","kb@kb.com")
@@ -59,5 +68,4 @@ transferor = kb
 transferee = magic
 print(("{} is transferring {}{:,.2f} to {}").format(transferor.name,transferor.currType,transfered_amt,transferee.name))
 transferor.transfer_money(transferee,transfered_amt)
-
-
+"""

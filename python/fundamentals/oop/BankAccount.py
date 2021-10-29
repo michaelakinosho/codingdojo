@@ -1,3 +1,9 @@
+"""
+Author: Michael Akinosho
+Date: October 29, 2021
+Test units are available below and are commmented out
+class User is imported by Users_with_BankAccounts
+"""
 class BankAccount:
     int_rate = 0.0
     balance = 0.0
@@ -42,7 +48,7 @@ class BankAccount:
             self.balance -= amount
         else:
             self.display_account_info()
-            print(("Insufficient funds, account has incurred a fee of ${:,.2f}, due to withdrawal of ${:,.2f}").format(self.overdraw_fee,amount))
+            print(("Insufficient funds, account has incurred a fee of ${:,.2f}, due to withdrawal of ${:,.2f}.").format(self.overdraw_fee,amount))
             self.balance -= (amount + self.overdraw_fee)
             self.display_account_info()
             print('\n')
@@ -54,12 +60,13 @@ class BankAccount:
         
     def yield_interest(self):
         if self.pos_balance(self.balance):
-            print(("Current yield on {} Account is:{}{:,.2f}").format(self.acct_type,self.currType,self.balance*self.int_rate))
+            print(("Current yield on {} Account is: {}{:,.2f}.").format(self.acct_type,self.currType,self.balance*self.int_rate))
             self.balance = self.balance + round((self.balance * self.int_rate),2)
         else:
-            print("Unfortunately no yield was earned, as account balance was below minimum")
+            print("Unfortunately no yield was earned, as account balance was below minimum.")
         return self
 
+"""
 CheckingAcct = BankAccount('Checking',0.10,75000)
 SavingsAcct = BankAccount('Savings',0.01,2000)
 
@@ -68,3 +75,4 @@ print('\n')
 SavingsAcct.deposit(300).deposit(500).withdraw(10000).withdraw(900.50).display_account_info().yield_interest().display_account_info()
 print('\n')
 BankAccount.all_bankaccounts()
+"""
