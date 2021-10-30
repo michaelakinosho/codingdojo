@@ -19,6 +19,8 @@ class Users_with_Bank_Accounts:
     
     #calls the Bank Account method
     def withdraw(self, amount):
+        if self.bankaccount.balance - amount < 0:
+            print(self.user.name)
         self.bankaccount.withdraw(amount)
         return self
     
@@ -49,14 +51,15 @@ class Users_with_Bank_Accounts:
         self.display_account_info(), other_user.display_account_info()
         return self
 
-#case one the superclasses are instantiated then passed to Users with Bank Accounts 
-username = User('Michael Jordan','mj@mj.com')
-accounttype = BankAccount('Checking',0.10,75000)
-User1 = Users_with_Bank_Accounts(username,accounttype)
-User1.deposit(5000).withdraw(100000).display_account_info().yield_interest().display_account_info()
+if __name__ == "__main__":
+    #case one the superclasses are instantiated then passed to Users with Bank Accounts
+    username = User('Michael Jordan','mj@mj.com')
+    accounttype = BankAccount('Checking',0.10,75000)
+    User1 = Users_with_Bank_Accounts(username,accounttype)
+    User1.deposit(5000).withdraw(100000).display_account_info().yield_interest().display_account_info()
 
-#case the two superclasses are passed as parameters
-User2 = Users_with_Bank_Accounts(User('Kobe Bryant','kb@kb.com'),BankAccount('Savings',0.50,1750000))
-User2.deposit(5000).withdraw(100000).display_account_info().yield_interest().display_account_info()
-print('\n')
-User2.transfer_money(User1,2000000)
+    #case the two superclasses are passed as parameters
+    User2 = Users_with_Bank_Accounts(User('Kobe Bryant','kb@kb.com'),BankAccount('Savings',0.50,1750000))
+    User2.deposit(5000).withdraw(100000).display_account_info().yield_interest().display_account_info()
+    print('\n')
+    User2.transfer_money(User1,2000000)

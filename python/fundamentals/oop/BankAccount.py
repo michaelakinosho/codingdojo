@@ -66,13 +66,12 @@ class BankAccount:
             print("Unfortunately no yield was earned, as account balance was below minimum.")
         return self
 
-"""
-CheckingAcct = BankAccount('Checking',0.10,75000)
-SavingsAcct = BankAccount('Savings',0.01,2000)
+if __name__ == "__main__":
+    CheckingAcct = BankAccount('Checking',0.10,75000)
+    SavingsAcct = BankAccount('Savings',0.01,2000)
 
-CheckingAcct.deposit(150000).deposit(250000).deposit(0.23).display_account_info().yield_interest().display_account_info()
-print('\n')
-SavingsAcct.deposit(300).deposit(500).withdraw(10000).withdraw(900.50).display_account_info().yield_interest().display_account_info()
-print('\n')
-BankAccount.all_bankaccounts()
-"""
+    CheckingAcct.deposit(150000).deposit(250000).deposit(0.23).display_account_info().yield_interest().display_account_info()
+    print('\n')
+    SavingsAcct.deposit(300).deposit(500).withdraw(10000).withdraw(900.50).display_account_info().yield_interest().display_account_info()
+    print('\n')
+    BankAccount.all_bankaccounts()
