@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: linen;
+}
+h3 {
+  color: black;
+  align-items: center;
+}
+p {
+  color: maroon;
+  margin-left: 40px;
+  width: 120px;
+  height: 120px;
+  outline: solid;
+  background-color: aqua;
+}
+</style>
+</head>
+<body>
+<h3>Welcome!</h3>
+{% for x in range(0,times): %} 
+    <p style = "background-color:{{color}};"></p>
+{% endfor %}
+
+</body>
+</html>
