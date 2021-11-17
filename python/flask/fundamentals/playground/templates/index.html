@@ -4,6 +4,8 @@
 <style>
 body {
   background-color: linen;
+  display: inline-block;
+  width:auto;
 }
 h3 {
   color: black;
@@ -16,13 +18,14 @@ p {
   height: 120px;
   outline: solid;
   background-color: aqua;
+  display: inline-block;
 }
 </style>
 </head>
 <body>
 <h3>Welcome!</h3>
 {% for x in range(0,times): %} 
-    <p style = "background-color:{{color}};"></p>
+    <p style = "background-color:{{ color }}"></p>
 {% endfor %}
 
 </body>

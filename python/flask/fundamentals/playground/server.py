@@ -19,7 +19,6 @@ def play_num(num):
 def play_num_color(num,myColor):
     return render_template("index.html",times=num,color=myColor)
 
-
 @app.errorhandler(404)
 def page_not_found(error):
     return "Sorry! Page Not Available."
