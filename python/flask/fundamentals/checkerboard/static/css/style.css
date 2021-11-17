@@ -1,0 +1,25 @@
+body {
+    background-color: linen;
+    width:auto;
+  }
+  h3 {
+    color: black;
+    align-items: center;
+  }
+  table {
+    padding:0px;
+    border-spacing: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+    
+  }
+  td {
+    color: maroon;
+    width: 20px;
+    height: 20px;
+    border-color: black;
+    border-style: solid;
+    background-color: aqua;
+    margin: 0px;
+    text-align: center;
+  }
