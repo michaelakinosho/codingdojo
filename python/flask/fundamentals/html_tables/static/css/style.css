@@ -1,0 +1,29 @@
+body {
+    background-color: linen;
+    width:auto;
+  }
+  h3 {
+    color: black;
+    align-items: center;
+  }
+  table {
+    padding:0px;
+    border-spacing: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+    
+  }
+  th, td {
+    color: maroon;
+    width:fit-content;
+    height:fit-content;
+    border-color: black;
+    border-style: solid;
+    background-color: aqua;
+    margin-right: 15px;
+    padding: 5px;
+    text-align: center;
+  }
+  th {
+      background-color: aliceblue;
+  }

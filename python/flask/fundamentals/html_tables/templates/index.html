@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Working with HTML tables</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <h3>Version created, not based on a Framework, kind of brute force!!</h3>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Full Name</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user['first_name'] }} </td>
+                <td>{{ user['last_name'] }} </td>
+                <td>{{ user['first_name'] }} {{user['last_name']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
