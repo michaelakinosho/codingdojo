@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Counter</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        <div class=uk-flex-around>
+        <div class="uk-container uk-container-expand uk-text-center uk-align-center uk-margin-xlarge-top">
+            <h1>Counter</h1>
+            <h3>Current user: {{session['username']}}</h3>
+            <p id="counter">Actual visits: {{session['actual_visits']}}</p>
+            <p id="counter">Number of visits: {{session['user_visits']}}</p>
+            <form action='/user' method='post'>
+                <label for='username_lbl'>Username:</label>
+                <input type='text' name='username' placeholder="Enter username" value="Guest">
+                <input type='submit' value='submit username'>
+            </form>
+            <form action='/reset' method='post'>
+                <input type='submit' value='reset'>
+            </form>
+            <form action='/process' method='post'>
+                <input type='submit' value='count by 2'>
+            </form>
+            <form action='/user_counts' method='post'>
+                <label for='count'>Increase Count by:</label>
+                <input id="count_num" type='text' name='count' value="0">
+                <input type='submit' value='increase count' onclick="checkValues()">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </body>
+</html>
