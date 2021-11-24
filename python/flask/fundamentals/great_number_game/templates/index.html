@@ -1,0 +1,56 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: November 22nd, 2021
+    Purpose: Flasks Fundamentals @ Coding Dojo*/-->
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Great Number Game</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css">
+            <meta charset="UTF-8">
+            <meta name="description" content="Try and guess a number between 1 and 100">
+            <meta name="keywords" content="number guessing, random numbers">
+            <meta name="author" content="Michael Akinosho">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        </head>
+        <body>
+            <header>
+                <div>The Header Section</div>
+    
+            </header>
+            <main class="uk-flex uk-flex-center">
+                <div class="uk-flex uk-flex-middle uk-flex-column">
+                    <h1>Welcome to the Great Number Game!!!</h1>
+                    <h3>I am thinking of a number between 1 and 100</h3>
+                    {% if session['results'] == "tooLow" %}
+                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(250, 91, 91)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too Low!!</h2></div>
+                    {% elif session['results'] == "tooHigh" %}
+                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(91, 91, 250)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too High!!</h2></div>
+                    {% elif session['results'] == "correctGuess" %}
+                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(91, 250, 91)"><h1 class="uk-flex-middle uk-flex-center" style="color:black">{{session['myNum']}} is the Correct Guess!!!!</h1></div>
+                    {% endif %}
+                    <div class="uk-padding uk-margin" style="background-color:rgb(198, 201, 202)">
+                    
+                    {% if session['results'] != "correctGuess" %}
+                        <form action='/guess' method='post' class="uk-flex uk-flex-column uk-flex-middle">
+                            <label class="uk-form-label">Take a Guess!!!</label>
+                            <input id="your_guess" class="uk-form-controls uk-margin" name="num_guess" type='text' value='0'>
+                            <input type='submit' class="uk-form-controls" value='Guess' onclick="checkValues()">
+                        </form>
+                    {% elif session['results'] == "correctGuess" %}
+                        <form action='/reset' method='post' class="uk-flex uk-flex-column uk-flex-middle">
+                            <input type='submit' class="uk-form-controls" value='Play Again?'>
+                    {% endif %}
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <div>The Footer Section</div>
+    
+            </footer>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </body>
+    </html>
