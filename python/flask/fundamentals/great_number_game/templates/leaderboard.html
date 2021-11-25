@@ -1,0 +1,65 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: November 22nd, 2021
+    Purpose: Flasks Fundamentals @ Coding Dojo*/-->
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Great Number Game</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
+            <meta charset="UTF-8">
+            <meta name="description" content="Try and guess a number between 1 and 100">
+            <meta name="keywords" content="number guessing, random numbers">
+            <meta name="author" content="Michael Akinosho">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        </head>
+        <body>
+            <header>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Header Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><a href="/">Home</a></il>
+                            <il class="uk-padding"><a href="/leaderboard">Leaderboard</a></il>
+                            <il class="uk-padding"><a href="/destroy_session">Reset Game</a></il>
+                        </ul>
+                    </div>
+                </nav>
+    
+            </header>
+            <main class="uk-flex uk-flex-center">
+                <div class="uk-flex uk-flex-middle uk-flex-column">
+                    <h1>Leaderboard</h1>
+                    <div class="uk-overflow_auto uk-container uk-container-xsmall">
+                        <table class="uk-table uk-table-divider uk-table-middle">
+                            <tr>
+                                <th>Name</th>
+                                <th>Number of Attempts</th>
+                            </tr>
+                            {% for lead in leaders %}
+                                <tr>
+                                    <td>{{ lead[0] }}</td>
+                                    <td>{{ lead[1] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        </div>
+                </div>
+            </main>
+            <footer>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Footer Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><p>Disclaimer: Resetting does not clear the leaderboard, only shutting the app down does.</p></il>
+                        </ul>
+                    </div>
+                </nav>
+            </footer>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </body>
+    </html>

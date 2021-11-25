@@ -8,7 +8,8 @@
         <head>
             <title>Great Number Game</title>
             <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
             <meta charset="UTF-8">
             <meta name="description" content="Try and guess a number between 1 and 100">
             <meta name="keywords" content="number guessing, random numbers">
@@ -18,7 +19,16 @@
         </head>
         <body>
             <header>
-                <div>The Header Section</div>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Header Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><a href="/">Home</a></il>
+                            <il class="uk-padding"><a href="/leaderboard">Leaderboard</a></il>
+                            <il class="uk-padding"><a href="/destroy_session">Reset Game</a></il>
+                        </ul>
+                    </div>
+                </nav>
     
             </header>
             <main class="uk-flex uk-flex-center">
@@ -26,30 +36,56 @@
                     <h1>Welcome to the Great Number Game!!!</h1>
                     <h3>I am thinking of a number between 1 and 100</h3>
                     {% if session['results'] == "tooLow" %}
-                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(250, 91, 91)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too Low!!</h2></div>
+                        <div class="uk_card uk-card-body uk-card-large uk-border-rounded" style="background-color:rgb(250, 91, 91)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too Low!!</h2></div>
                     {% elif session['results'] == "tooHigh" %}
-                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(91, 91, 250)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too High!!</h2></div>
+                        <div class="uk_card uk-card-body uk-card-large uk-border-rounded" style="background-color:rgb(91, 91, 250)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Too High!!</h2></div>
                     {% elif session['results'] == "correctGuess" %}
-                        <div class="uk_card uk-card-body uk-card-large" style="background-color:rgb(91, 250, 91)"><h1 class="uk-flex-middle uk-flex-center" style="color:black">{{session['myNum']}} is the Correct Guess!!!!</h1></div>
+                        <div class="uk_card uk-card-body uk-card-large uk-border-rounded" style="background-color:rgb(91, 250, 91)"><h1 class="uk-flex-middle uk-flex-center" style="color:black">{{session['myNum']}} is the Correct Guess!!!!</h1>
+                            <h2>Leaderboard Submission</h2>
+                            <form action='/board_name_submit' method='post' class="uk-flex uk-flex-row uk-flex-middle">
+                                <label class="uk-form-label">Enter your name</label>
+                                <input id="user_name" class="uk-form-controls" name="user_name" type='text' value='Guest'>
+                                <input type="submit" class="uk-form-controls" value="Submit">
+                            </form>
+                        </div>
+                    {% elif session['results'] == "youLose" %}
+                        <div class="uk_card uk-card-body uk-card-large uk-border-rounded" style="background-color:rgb(231, 112, 241)"><h2 class="uk-flex-middle uk-flex-center" style="color:black">Sorry you lose. The number is {{session['myNum']}}.</h1></div>
                     {% endif %}
-                    <div class="uk-padding uk-margin" style="background-color:rgb(198, 201, 202)">
+                    <div class="uk-padding uk-margin uk-border-rounded" style="background-color:rgb(198, 201, 202)">
                     
-                    {% if session['results'] != "correctGuess" %}
+                    {% if session['results'] != "correctGuess" and session['results'] != "youLose" %}
                         <form action='/guess' method='post' class="uk-flex uk-flex-column uk-flex-middle">
                             <label class="uk-form-label">Take a Guess!!!</label>
                             <input id="your_guess" class="uk-form-controls uk-margin" name="num_guess" type='text' value='0'>
+                            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex uk-flex-column" >
+                                <label class="uk-form-label">How many guesses do you want to make?</label>
+                                <fieldset class="uk-fieldset">
+                                    <label><input class="uk-radio" name="radio_guess" type="radio"  value="100" style="background-color:black;" checked>100</label>
+                                    <label><input class="uk-radio" name="radio_guess" type="radio" value="5" style="background-color:black;">5</label>
+                                </fieldset>
+                            </div>
                             <input type='submit' class="uk-form-controls" value='Guess' onclick="checkValues()">
                         </form>
-                    {% elif session['results'] == "correctGuess" %}
+                        <p>You have {{session['limitGuesses'] - session['yourGuesses_count']}} attempts remaining.</p>
+                        <p>You have made {{session['yourGuesses_count']}} guesses.</p>
+                        <p>Keep trying!!!</p>
+                    {% else %}
                         <form action='/reset' method='post' class="uk-flex uk-flex-column uk-flex-middle">
                             <input type='submit' class="uk-form-controls" value='Play Again?'>
+                        </form>
                     {% endif %}
                     </div>
                 </div>
             </main>
             <footer>
-                <div>The Footer Section</div>
-    
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Footer Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><p>Disclaimer: Resetting does not clear the leaderboard, only shutting the app down does.</p></il>
+                        </ul>
+                    </div>
+                </nav>
             </footer>
             <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
         </body>
