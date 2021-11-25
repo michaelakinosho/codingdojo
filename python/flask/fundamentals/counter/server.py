@@ -2,7 +2,6 @@
 #Date created: November 19, 2021
 from logging import debug, error
 from flask import Flask, render_template, request, redirect, session
-from werkzeug.exceptions import RequestEntityTooLarge
 import base64
 
 app = Flask(__name__)
