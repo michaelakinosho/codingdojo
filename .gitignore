@@ -1,8 +1,4 @@
-
-python/flask/fundamentals/hello_flask/Pipfile
 *.lock
 *.scss
 *.map
-python/flask/fundamentals/html_tables/Pipfile
 */Pipfile
-python/flask/fundamentals/checkerboard/Pipfile
