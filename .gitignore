@@ -4,3 +4,4 @@ python/flask/fundamentals/hello_flask/Pipfile
 *.scss
 *.map
 python/flask/fundamentals/html_tables/Pipfile
+*/Pipfile
