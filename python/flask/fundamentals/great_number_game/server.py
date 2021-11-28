@@ -23,7 +23,7 @@ def index():
 
     if 'leaderBoard' not in session:
         session['leaderBoard'] = list()
-    print(session['myNum'])
+    #print(session['myNum'])
     return render_template("index.html")
 
 @app.route('/guess',methods=['POST'])
@@ -72,7 +72,6 @@ def board_name_submit():
     
     session['yourGuesses_count'] = 0
     return redirect('/leaderboard')
-
 
 @app.route('/reset',methods=['POST'])
 def reset():
