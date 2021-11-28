@@ -1,0 +1,74 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: November 27, 2021
+    Purpose: Flask Fundamentals @ Coding Dojo*/-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
+            <meta charset="UTF-8">
+            <meta name="description" content="Template HTML file">
+            <meta name="keywords" content="coding, dojo, survey, forms">
+            <meta name="author" content="Michael Akinosho">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <div class="uk-flex uk-flex-column uk-padding">
+                <h1>Dojo Survey</h1>
+                <form action='/post_survey' method='post' class="uk-flex uk-flex-column">
+                    <label class="uk-form-label">Name:</label>
+                    <input id="user_name" class="uk-form-controls uk-border-rounded" name="user_name" type="text">
+                    <label class="uk-form-label">Email:</label>
+                    <input id="user_email" class="uk-form-controls uk-border-rounded" name="user_email" type="email">
+                    <label class="uk-form-label">Dojo Location:</label>
+                    <select class="uk-select uk-border-rounded" id="dojo_location" name="dojo_location">
+                        <option value="">--Select a Location--</option>
+                        <option value="Bellevue, WA">Bellevue, WA</option>
+                        <option value="Boise, ID">Boise, ID</option>
+                        <option value="Chicago, IL">Chicago, IL</option>
+                        <option value="Los Angeles, CA">Los Angeles, CA</option>
+                        <option value="Silicon Valley, CA">Silicon Valley, CA</option>
+                    </select>
+                    <label class="uk-form-label">Favorite Language:</label>
+                    <select class="uk-select uk-border-rounded" id="favorite_language" name="favorite_language">
+                        <option value="">--Select a Language--</option>
+                        <option value="Python">Python</option>
+                        <option value="JAVA">JAVA</option>
+                        <option value="C#">C#</option>
+                        <option value="R">R</option>
+                        <option value="Javascript">Javascript</option>
+                    </select>
+                    <fieldset class="uk-fieldset">
+                        <label class="uk-form-label">May we contact you via email?</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-radio dojo-radio-button" name="email_contact" type="radio" value="Yes">&nbspyes</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-radio dojo-radio-button" name="email_contact" type="radio" value="No">&nbspno</label>
+                    </fieldset>
+                    <fieldset class="uk-fieldset">
+                        <label class="uk-form-label">Are you a Coding Dojo alum?</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-radio dojo-radio-button" name="dojo_alum" type="radio" value="Yes">&nbspyes</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-radio dojo-radio-button" name="dojo_alum" type="radio" value="No">&nbspno</label>
+                    </fieldset>
+                    <fieldset class="uk-fieldset uk-flex uk-flex-column">
+                        <label class="uk-form-label">Topic areas interested in: </label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-checkbox dojo-checkbox-button" type="checkbox" name="data_science" value="Data Science">&nbspData Science</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-checkbox dojo-checkbox-button" type="checkbox" name="software_dev" value="Software Development">&nbspSoftware Development</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-checkbox dojo-checkbox-button" type="checkbox" name="robotics" value="Robotics">&nbspRobotics</label>
+                            <label class="uk-form-label dojo-survey-label"><input class="uk-checkbox dojo-checkbox-button" type="checkbox" name="user_experience" value="User Experience">&nbspUser Experience</label>
+                    </fieldset>
+                    <textarea class="uk-textarea dojo-comment-area" id="dojo-survey-comments" rows="5" name="dojo-comment-area" placeholder="Please share comments"></textarea>
+                    <input type="submit" class="uk-form-controls" id="survey_submit" value="Submit">
+                </form>
+            </div>
+
+        </main>
+        <footer></footer>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: November 22nd, 2021
+    Purpose: Flasks Fundamentals @ Coding Dojo*/-->
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
+            <meta charset="UTF-8">
+            <meta name="description" content="Template HTML file">
+            <meta name="keywords" content="coding, dojo, survey, forms">
+            <meta name="author" content="Michael Akinosho">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        </head>
+        <body>
+            <header></header>
+            <main>
+                <div class="uk-flex uk-flex-column uk-padding">
+                    <p class="uk-text-large uk-text-bold" style="color:blue;">{{session['user_name']}}</p>
+                    <p class="dojo-survey-element">Email: {{session['user_email']}}</p>
+                    <p class="dojo-survey-element">Dojo Location: {{session['dojo_location']}}</p>
+                    <p class="dojo-survey-element">Favorite Language: {{session['favorite_language']}}</p>
+                    <p class="dojo-survey-element">May we contact by email: {{session['email_contact']}}</p>
+                    <p class="dojo-survey-element">Are you a Coding Dojo alum: {{session['dojo_alum']}}</p>
+                    <table class="uk-table">
+                        <tr>
+                            <td class="dojo-survey-element uk-text-bold">Topic areas of interest</td>
+                        </tr>
+                        {% for topic in session['interested_topics'] %}
+                            <tr>
+                                <td class="dojo-survey-element">{{topic}}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                    <p class="dojo-survey-element">Comments: {{session['dojo-comment-area']}}</p>
+                </div>
+            </main>
+            <footer>
+                <p><a href="/destroy_session" style="color:blue;">Home</a></p>
+            </footer>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </body>
+    </html>
