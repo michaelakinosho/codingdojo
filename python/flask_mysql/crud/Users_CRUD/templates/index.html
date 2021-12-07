@@ -24,8 +24,8 @@
                 <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav">
                         <il class="uk_active uk-padding"><a href="/">Home</a></il>
-                        <il class="uk-padding"><a href="/item2">Add Item 2</a></il>
-                        <il class="uk-padding"><a href="/item3">Add Item 3</a></il>
+                        
+                        <il class="uk-padding"><a href="/">Add Item 3</a></il>
                     </ul>
                 </div>
             </nav>
@@ -33,27 +33,25 @@
         </header>
         <main>
             <div>The Main Section</div>
-            <div>
-                <h1>All My Friends</h1>
-                {% for one_user in all_users %}
-                    <p>First Name: {{one_user.first_name}}</p>
-                    <p>Last Name: {{one_user.last_name}}</p>
-                    <p>Email: {{one_user.email}}</p>
-                {% endfor %}
-            </div>
-            <div>
-                <h1>Add a Friend</h1>
-                <form action="/create_friend" method="POST">
-                    <label for="fname">First Name:</label>
-                    <input type="text" name="fname">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" name="lname">
-                    <label for="email" >Occupation:</label>
-                    <input type="text" name="email">
-                    <input type="submit" value="Add User">
-                </form> 
-            </div>
 
+            <div class="uk-overflow_auto uk-container uk-container-xsmall">
+                <h1>All My Friends</h1>
+                <table class="uk-table uk-table-divider uk-table-middle">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                    </tr>
+                    {% for one_user in all_users %}
+                        <tr>
+                            <td>{{ one_user.first_name }}</td>
+                            <td>{{ one_user.last_name }}</td>
+                            <td>{{ one_user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="uk-padding"><a style="color:white; background-color:black" href="/user/new">New User</a></div>
         </main>
         <footer>
             <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">

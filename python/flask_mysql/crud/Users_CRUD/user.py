@@ -16,14 +16,14 @@ class User:
         # make sure to call the connectToMySQL function with the schema you are targeting.
         results = connectToMySQL('users_crud').query_db(query)
         # Create an empty list to append our instances of friends
-        friends = []
+        users = []
         # Iterate over the db results and create instances of friends with cls.
-        for friend in results:
-            friends.append( cls(friend) )
-        return friends
+        for user in results:
+            users.append( cls(user) )
+        return users
     
     @classmethod
     def save(cls, data ):
-        query = "INSERT INTO friends ( first_name , last_name , email) VALUES ( %(fname)s , %(lname)s , %(email)s);"
+        query = "INSERT INTO users ( first_name , last_name , email) VALUES ( %(fname)s , %(lname)s , %(email)s);"
         # data is a dictionary that will be passed into the save method from server.py
-        return connectToMySQL('first_flask').query_db( query, data )
+        return connectToMySQL('users_crud').query_db( query, data )

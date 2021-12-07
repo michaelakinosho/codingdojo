@@ -11,12 +11,16 @@ def index():
     print(users)
     return render_template("index.html", all_users = users)
 
+@app.route("/user/new")
+def open_new():
+    return render_template("/user/new.html")
+
 @app.route('/create_friend',methods=["POST"])
 def create_friend():
     data = {
         "fname": request.form["fname"],
         "lname": request.form["lname"],
-        "occ": request.form['occ']
+        "email": request.form['email']
     }
     
     User.save(data)
