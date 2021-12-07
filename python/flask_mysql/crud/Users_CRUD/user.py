@@ -17,13 +17,32 @@ class User:
         results = connectToMySQL('users_crud').query_db(query)
         # Create an empty list to append our instances of friends
         users = []
-        # Iterate over the db results and create instances of friends with cls.
+        # Iterate over the db results and create instances of users with cls.
         for user in results:
             users.append( cls(user) )
         return users
     
     @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        results = connectToMySQL('users_crud').query_db( query, data)
+        one_user = []
+        for user in results:
+            one_user.append(cls(user))
+        return one_user
+        
+    @classmethod
     def save(cls, data ):
         query = "INSERT INTO users ( first_name , last_name , email) VALUES ( %(fname)s , %(lname)s , %(email)s);"
         # data is a dictionary that will be passed into the save method from server.py
         return connectToMySQL('users_crud').query_db( query, data )
+    
+    @classmethod
+    def update(cls, data ):
+        query = "UPDATE users SET first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, updated_at = %(updated_at)s WHERE id = %(id)s;"
+        return connectToMySQL('users_crud').query_db( query, data )
+    
+    @classmethod
+    def delete(cls, data ):
+        query = "DELETE FROM users WHERE id = %(id)s;"
+        return connectToMySQL('users_crud').query_db(query, data)

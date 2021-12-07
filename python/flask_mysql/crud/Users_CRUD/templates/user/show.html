@@ -31,22 +31,36 @@
                 </nav>
     
             </header>
-            <main class="uk-flex uk-flex-center">
+            <main>
                 <div>The Main Section</div>
-                
-                <div>
-                    <h1>Add a User</h1>
-                    <form action="/add_user" method="POST">
-                        <label for="fname">First Name:</label>
-                        <input type="text" name="fname">
-                        <label for="lname">Last Name:</label>
-                        <input type="text" name="lname">
-                        <label for="email" >Email:</label>
-                        <input type="text" name="email">
-                        <input type="submit" value="Add User">
-                    </form> 
-                </div>
     
+                <div class="uk-overflow_auto uk-container uk-container-xsmall">
+                    <h1>All My Friends</h1>
+                    <table class="uk-table uk-table-divider uk-table-middle">
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Created At</th>
+                            
+                        </tr>
+                        {% for user in one_user %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.created_at }}</td>
+                            
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                {% for user in one_user %}
+                    <div class="uk-padding"><a style="color:white; background-color:black" href="/user/edit/{{ user.id }}">Edit User</a>
+                        <a style="color:white; background-color:black" href="/delete_user/{{ user.id }}">Delete User</a></div>
+                {% endfor %}
             </main>
             <footer>
                 <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">

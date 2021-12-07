@@ -2146,8 +2146,8 @@ select.uk-form-width-xsmall {
 /* Label
  ========================================================================== */
 .uk-form-label {
-  /*color: #333;*/
-  color: white;
+  color: #333;
+  /*color: white;*/
   font-size: 0.875rem;
 }
 
