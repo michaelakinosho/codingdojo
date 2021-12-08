@@ -1,10 +1,7 @@
-from datetime import datetime
-from logging import debug, error
 from flask import Flask, render_template, request, redirect, session# import the class from friend.py
-from user import User
+from flask_app.models.user import User
+from flask_app import app
 import datetime
-
-app = Flask(__name__)
 
 @app.route("/users")
 @app.route("/")
@@ -79,7 +76,4 @@ def show_user(num):
     
     user = User.get_one(data)
     return render_template("/user/show.html", one_user = user)
-    
-            
-if __name__ == "__main__":
-    app.run(debug=True)
+

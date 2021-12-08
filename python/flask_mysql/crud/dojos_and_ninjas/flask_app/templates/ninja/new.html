@@ -1,0 +1,80 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: October 19, 2021
+    Purpose: Web Fundamentals @ Coding Dojo*/-->
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Base HTML Template, Always change</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+                <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+                <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
+                <meta charset="UTF-8">
+                <meta name="description" content="Template HTML file">
+                <meta name="keywords" content="remember to add keywords here">
+                <meta name="author" content="Michael Akinosho">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        </head>
+        <body>
+            <header>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Header Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><a href="/">Home</a></il>
+                            
+                            <il class="uk-padding"><a href="/">Add Item 3</a></il>
+                        </ul>
+                    </div>
+                </nav>
+    
+            </header>
+            <main class="uk-flex uk-flex-center">
+                
+                <div class="uk-padding uk-border-rounded" style="background-color:green;">
+                    <h1>Add a Ninja</h1>
+                    <form class="uk-form-stacked" action="/add_ninja" method="POST">
+                        <div class="uk-padding-small">
+                        <label class="uk-form-label" style="color:black" for="dojo">Dojo:</label>
+                        <select name="dojo_name">
+                            <option>--Select a Location--</option>
+                            {% for dojo in all_dojos %}
+                            <option>{{ dojo.name }}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="uk-padding-small">
+                        <label class="uk-form-label" style="color:black" for="first_name">First Name:</label>
+                        <input type="text" name="first_name">
+                        </div>
+                        <div class="uk-padding-small">
+                        <label class="uk-form-label" style="color:black" for="last_name">Last Name:</label>
+                        <input type="text" name="last_name">
+                        </div>
+                        <div class="uk-padding-small">
+                        <label class="uk-form-label" style="color:black" for="age" >Age:</label>
+                        <input type="number" name="age">
+                        </div>
+                        <div class="uk-padding-small">
+                        <input type="submit" value="Add Ninja">
+                        </div>
+                    </form> 
+                </div>
+    
+            </main>
+            <footer>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div>The Footer Section</div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><p></p></il>
+                        </ul>
+                    </div>
+                </nav>
+    
+            </footer>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </body>
+    </html>
