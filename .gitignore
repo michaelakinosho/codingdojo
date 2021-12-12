@@ -13,3 +13,7 @@ resumes/ProtagonistPersonalityType.pdf
 python/flask_mysql/crud/Users_CRUD/Pipfile
 python/flask_mysql/db_connection/first_flask_mysql/Pipfile
 python/flask_mysql/validation/login_and_registration/Pipfile
+data-science-assignments/08 - Gradient Boosting Algorithms/tabular-playground-series-dec-2021/sample_submission.csv
+data-science-assignments/08 - Gradient Boosting Algorithms/tabular-playground-series-dec-2021/test.csv
+data-science-assignments/08 - Gradient Boosting Algorithms/tabular-playground-series-dec-2021/test3.csv
+data-science-assignments/08 - Gradient Boosting Algorithms/tabular-playground-series-dec-2021/train.csv
