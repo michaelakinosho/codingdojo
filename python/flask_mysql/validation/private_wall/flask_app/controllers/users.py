@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash# imp
 from flask_app.models.user import User
 from flask_app import app
 from flask_bcrypt import Bcrypt
-import datetime
-
+from werkzeug.datastructures import ImmutableMultiDict
 bcrypt = Bcrypt(app)
 
 @app.route("/")
@@ -13,9 +12,15 @@ def index():
 
 @app.route('/register/user',methods=["POST"])
 def register():
+    data = { "email" : request.form['email']}
+    user_with_email = User.get_by_email(data)
+    if user_with_email:
+        flash("Email is invalid or unable", "register")
+        return render_template("index.html")
+        
     if not User.validate_user(request.form):
         form_info = request.form
-        return render_template("index.html",test=request.form)
+        return render_template("index.html")
     
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     
@@ -26,8 +31,7 @@ def register():
         "password": pw_hash
     }
     
-    user_id = User.save(data)
-    session['id'] = user_id
+    session['id'] = User.save(data)
     
     return redirect("/user/dashboard")
 
@@ -35,7 +39,7 @@ def register():
 def login():
     data = { "email": request.form['email']  }
     user = User.get_by_email(data)
-    
+
     if not user:
         flash("Invalid Email/Password","login")
         return redirect("/")
@@ -44,7 +48,7 @@ def login():
         return redirect("/")
 
     session['id'] = user.id
-    
+
     return redirect("/user/dashboard")
 
 @app.route('/user/dashboard')
@@ -54,9 +58,13 @@ def show_user():
         "id": session['id']
     }
     user_info = User.get_by_id(data)
-    return render_template("/user/dashboard.html", one_user = user_info)
+    all_users = User.get_all()
+    msg_sent = User.messages_sent(data)
+    msg_received = User.messages_received(data)
+    #print(msg_sent)
+    return render_template("/user/dashboard.html", one_user = user_info, all_users = all_users,sent_msg = msg_sent, recd_msg = msg_received)
 
-@app.route('/logout', methods= ['POST'])
+@app.route('/logout')
 def close_sessions():
     session.clear()
-    return redirect('/')
+    return render_template("index.html")

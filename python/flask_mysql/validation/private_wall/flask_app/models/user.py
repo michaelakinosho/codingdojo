@@ -6,9 +6,10 @@ import re
 # create a regular expression object that we'll use later
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-cls.db = 'private_wall'
+
 
 class User:
+    db = 'private_wall'
     def __init__( self , data ):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -18,15 +19,19 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     # Now we use class methods to query our database
-
+        
+        
+    
     @classmethod
     def get_by_id(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
         results = connectToMySQL(cls.db).query_db( query, data)
-        one_user = []
-        for user in results:
-            one_user.append(cls(user))
-        return one_user
+        
+        #one_user = []
+        #for user in results:
+        #    one_user.append(cls(user))
+        
+        return cls(results[0])
         
     @classmethod
     def save(cls, data ):
@@ -60,13 +65,13 @@ class User:
             flash("Invalid email address!","register")
             is_valid = False
             
-        if len(user['password']) < 1 or user['password'].isspace():
-            flash("Password is blank","register")
+        if len(user['password']) < 8 or user['password'].isspace():
+            flash("Password must be at least 8 characters","register")
             is_valid = False
         
         caps_in_pw = re.findall("[A-Z]",user['password'])
         nums_in_pw = re.findall("[0-9]",user['password'])
-        if len(caps_in_pw) < 1 or  len(nums_in_pw) < 1:
+        if len(caps_in_pw) < 0 or len(nums_in_pw) < 0:
             flash("Password requires at least one capital letter and at least one number","register")
             is_valid = False
             
@@ -76,22 +81,33 @@ class User:
         
         if user['password'] != user['confirmpassword']:
             flash("Passwords do not match","register")
+            is_valid = False
         
         return is_valid
     
-    """
+    @classmethod
+    def messages_sent(cls, data ):
+        query = "SELECT * FROM view_messages_from_to WHERE sender_id = %(id)s;"
+        return connectToMySQL(cls.db).query_db( query, data )
+    
+    @classmethod
+    def messages_received(cls, data ):
+        query = "SELECT * FROM view_messages_from_to WHERE recipient_id = %(id)s;"
+        return connectToMySQL(cls.db).query_db( query, data )
+        
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
         # make sure to call the connectToMySQL function with the schema you are targeting.
-        results = connectToMySQL(mydb).query_db(query)
+        results = connectToMySQL(cls.db).query_db(query)
         # Create an empty list to append our instances of friends
         users = []
         # Iterate over the db results and create instances of users with cls.
         for user in results:
             users.append( cls(user) )
         return users
-        
+    
+    """    
     @classmethod
     def update(cls, data ):
         query = "UPDATE users SET first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, updated_at = %(updated_at)s WHERE id = %(id)s;"

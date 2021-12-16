@@ -1,0 +1,114 @@
+<!--/*  Authored/Developed by: Michael Akinosho
+    Date: October 19, 2021
+    Purpose: Web Fundamentals @ Coding Dojo*/-->
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Private Wall</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+                <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
+                <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
+                <meta charset="UTF-8">
+                <meta name="description" content="Template HTML file">
+                <meta name="keywords" content="remember to add keywords here">
+                <meta name="author" content="Michael Akinosho">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        </head>
+        <body>
+            <header>
+                <nav class="uk-flex uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div class="uk-padding"><h1>Coding Dojo Wall</h1></div>
+                    <div class="uk-navbar-right">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk-active uk-padding uk-text-bold"><a href="/logout">Log Out</a></il>
+                        </ul>
+                    </div>
+                    
+                    <div class="uk-padding"><h1>Welcome {{one_user.first_name}} {{one_user.last_name}}!!!</h1></div>
+                    
+                </nav>
+    
+            </header>
+            <main>
+                
+                <div class="uk-flex uk-container uk-flex-center uk-column-1-2">
+                    <div class="uk-padding uk-height-1-1 uk-border-rounded" style="background-color:rgb(104, 187, 243);">
+                        <h1>Messages for You: {{recd_msg|length}}</h1>
+                        <div class="uk-border-rounded">
+                            {% if recd_msg|length > 0 %}
+                            {% for msg in recd_msg %}
+                                <button class="accordion uk-border-rounded">{{msg['sender_first_name']}} {{msg['sender_last_name']}} {{msg['sent_message'][0:15]}}  Time message sent: {{ msg['message_datetime']}}</button>
+                                <div class="panel uk-border-rounded">
+                                    <p>{{msg['sent_message']}}</p>
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <div class="uk-margin uk-padding uk-border-rounded" style="background-color:rgb(104, 187, 243);">
+                            
+                            <h1>Send a Message:</h1>
+                            <form class="uk-form-stacked" action="/send_message" method="POST">
+                                <div class="uk-margin">
+                                    
+                                    <input type="hidden" id="sender_id" name="sender_id" value={{ one_user.id }}>
+                                    
+                                    <label class="uk-form-label uk-text-bold uk-text-large" for="message_recipients">Select recipient(s):</label>
+                                    <select class="uk-select uk-border-rounded" id="message_recipients" name="message_recipients" size="3" multiple>
+                                        {% for user in all_users %}
+                                            {% if user.id != session['id'] %}
+                                                <option value={{user.id}}>{{user.first_name + " " + user.last_name + " " + user.email}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <p style="color:white">Hold down Ctrl (windows) Command (Mac)</br>button to select multiple options.</p>
+                                </div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label uk-text-bold uk-text-large" for="message">Message for recipient(s):</label>
+                                    <textarea class="uk-textarea uk-border-rounded uk-text-large" id="message" name="message" rows="3" placeholder="Message"></textarea>
+                                </div>
+                                <div class="uk-margin">
+                                    <input type="submit" value="Send message">
+                                </div>
+                            </form>
+                            
+                        </div>
+
+                        <div class="uk-padding uk-border-rounded" style="background-color:rgb(104, 187, 243);">
+                            
+                            <h1>Messages Sent: {{sent_msg|length}}</h1>
+                            <div class="uk-border-rounded">
+                                {% if sent_msg|length > 0 %}
+                                {% for msg in sent_msg %}
+                                    <button class="accordion uk-border-rounded">{{msg['recipient_first_name']}} {{msg['recipient_last_name']}} {{msg['sent_message'][0:15]}}   Time message sent: {{ msg['message_datetime']}}</button>
+                                    <div class="panel uk-border-rounded">
+                                        <p>{{msg['sent_message']}}</p>
+                                    </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </main>
+            <footer>
+                <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
+                    <div></div>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <il class="uk_active uk-padding"><p></p></il>
+                        </ul>
+                    </div>
+                </nav>
+    
+            </footer>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </body>
+    </html>

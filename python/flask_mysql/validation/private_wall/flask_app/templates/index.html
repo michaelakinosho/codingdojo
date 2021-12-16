@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Base HTML Template, Always change</title>
+        <title>Register | Login</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/site.css') }}">
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.2/dist/css/uikit.min.css"> -->
@@ -20,15 +20,8 @@
     
     <body>
         <header>
-            <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
-                <div>The Header Section</div>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <il class="uk_active uk-padding"><a href="/">Home</a></il>
-                        
-                        <il class="uk-padding"><a href="/">Add Item 3</a></il>
-                    </ul>
-                </div>
+            <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(255, 255, 255);">
+                
             </nav>
 
         </header>
@@ -67,10 +60,11 @@
                     </form>
                     {% endblock %}
                 </div>
-                
+
                 <div class="uk-padding uk-border-rounded" style="background-color:green;">
                     {% include "login_layout.html" %}
                     {% block login %}
+                    
                     <h1>Login</h1>
                     <form class="uk-form-stacked" action="/login/user" method="POST">
                         <div class="uk-padding-small">
@@ -90,13 +84,8 @@
             </div>
         </main>
         <footer>
-            <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(247, 246, 183);">
-                <div>The Footer Section</div>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <il class="uk_active uk-padding"><p></p></il>
-                    </ul>
-                </div>
+            <nav class="uk-navbar-container" uk-navbar style="background-color: rgb(255, 255, 255);">
+                
             </nav>
 
         </footer>
