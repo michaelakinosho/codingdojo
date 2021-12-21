@@ -8,11 +8,13 @@ class Message:
     def __init__( self , data ):
         self.id = data['id']
         self.message = data['message']
-        self.user_sender_id = data['user_sender_id']
+        self.user_sender_id = None
+        #self.user_sender_id = data['user_sender_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-    # Now we use class methods to query our database
+        # Now we use class methods to query our database
         
+
     @classmethod
     def save_message(cls, data ):
         query = "INSERT INTO messages ( message , user_sender_id ) VALUES ( %(message)s , %(user_sender_id)s );"
@@ -26,9 +28,9 @@ class Message:
             sub_data['user_recipient_id'] = i
             query = "INSERT INTO messages_to_users ( message_id, user_recipient_id ) VALUE (%(message_id)s, %(user_recipient_id)s );"
             connectToMySQL(cls.db).query_db( query, sub_data )
-        
+
         # data is a dictionary that will be passed into the save method from server.py
-        
+
         query = "SELECT * FROM view_messages_from_to WHERE sender_id = %(user_sender_id)s;"
         return connectToMySQL(cls.db).query_db( query, data )
 
@@ -37,6 +39,9 @@ class Message:
         query = "UPDATE messages SET message = %(message)s, updated_at = %(updated_at)s WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db( query, data )
 
+    @staticmethod
+    def message_time_diff(self):
+        now_diff = Now() - self.created_at
     """
     @classmethod
     def delete(cls, data ):

@@ -1,12 +1,6 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
-import re
-
-# create a regular expression object that we'll use later
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
-
+from flask_app.models.message import Message
 
 class User:
     db = 'private_wall'
@@ -19,6 +13,7 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     # Now we use class methods to query our database
+        self.messages = []
         
         
     
@@ -49,47 +44,56 @@ class User:
         
         return cls(results[0])
     
-    @staticmethod
-    def validate_user( user ):
-        is_valid = True
-        # test whether a field matches the pattern
-        if len(user['fname']) < 1 or user['fname'].isspace():
-            flash("First name is blank","register")
-            is_valid = False
+    # @staticmethod
+    # def validate_user( user ):
+    #     is_valid = True
+    #     # test whether a field matches the pattern
+    #     if len(user['fname']) < 1 or user['fname'].isspace():
+    #         flash("First name is blank","register")
+    #         is_valid = False
         
-        if len(user['lname']) < 1 or user['lname'].isspace():
-            flash("Last name is blank","register")
-            is_valid = False
+    #     if len(user['lname']) < 1 or user['lname'].isspace():
+    #         flash("Last name is blank","register")
+    #         is_valid = False
         
-        if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid email address!","register")
-            is_valid = False
+    #     if not EMAIL_REGEX.match(user['email']):
+    #         flash("Invalid email address!","register")
+    #         is_valid = False
             
-        if len(user['password']) < 8 or user['password'].isspace():
-            flash("Password must be at least 8 characters","register")
-            is_valid = False
+    #     if len(user['password']) < 8 or user['password'].isspace():
+    #         flash("Password must be at least 8 characters","register")
+    #         is_valid = False
         
-        caps_in_pw = re.findall("[A-Z]",user['password'])
-        nums_in_pw = re.findall("[0-9]",user['password'])
-        if len(caps_in_pw) < 0 or len(nums_in_pw) < 0:
-            flash("Password requires at least one capital letter and at least one number","register")
-            is_valid = False
+    #     caps_in_pw = re.findall("[A-Z]",user['password'])
+    #     nums_in_pw = re.findall("[0-9]",user['password'])
+    #     if len(caps_in_pw) < 0 or len(nums_in_pw) < 0:
+    #         flash("Password requires at least one capital letter and at least one number","register")
+    #         is_valid = False
             
-        if len(user['confirmpassword']) < 1 or user['confirmpassword'].isspace():
-            flash("Confirm Password is blank","register")
-            is_valid = False
+    #     if len(user['confirmpassword']) < 1 or user['confirmpassword'].isspace():
+    #         flash("Confirm Password is blank","register")
+    #         is_valid = False
         
-        if user['password'] != user['confirmpassword']:
-            flash("Passwords do not match","register")
-            is_valid = False
+    #     if user['password'] != user['confirmpassword']:
+    #         flash("Passwords do not match","register")
+    #         is_valid = False
         
-        return is_valid
-    
+    #     return is_valid
+
     @classmethod
     def messages_sent(cls, data ):
-        query = "SELECT * FROM view_messages_from_to WHERE sender_id = %(id)s;"
-        return connectToMySQL(cls.db).query_db( query, data )
-    
+        user = User.get_by_id(data)
+        
+        print("User's first name:",user.first_name)
+        print("User's sent message:",user.messages)
+        
+        #query = "SELECT * FROM view_messages_from_to WHERE sender_id = %(id)s;"
+        query = "SELECT * FROM messages WHERE user_sender_id = %(id)s;"
+        messages = connectToMySQL(cls.db).query_db( query, data )
+        for message in messages:
+            user.messages.append(Message(message))
+        return user
+
     @classmethod
     def messages_received(cls, data ):
         query = "SELECT * FROM view_messages_from_to WHERE recipient_id = %(id)s;"

@@ -53,6 +53,8 @@
                         <div class="uk-margin uk-padding uk-border-rounded" style="background-color:rgb(104, 187, 243);">
                             
                             <h1>Send a Message:</h1>
+                            {% include "send_message_layout.html" %}
+                            {% block send_message %}
                             <form class="uk-form-stacked" action="/send_message" method="POST">
                                 <div class="uk-margin">
                                     
@@ -67,10 +69,11 @@
                                         {% endfor %}
                                     </select>
                                     <p style="color:white">Hold down Ctrl (windows) Command (Mac)</br>button to select multiple options.</p>
+                            {% endblock %}
                                 </div>
                                 <div class="uk-margin">
                                     <label class="uk-form-label uk-text-bold uk-text-large" for="message">Message for recipient(s):</label>
-                                    <textarea class="uk-textarea uk-border-rounded uk-text-large" id="message" name="message" rows="3" placeholder="Message"></textarea>
+                                    <textarea class="uk-textarea uk-border-rounded uk-text-large" id="message" name="message" rows="3" placeholder="Message" >{{session['message']}}</textarea>
                                 </div>
                                 <div class="uk-margin">
                                     <input type="submit" value="Send message">
@@ -81,11 +84,11 @@
 
                         <div class="uk-padding uk-border-rounded" style="background-color:rgb(104, 187, 243);">
                             
-                            <h1>Messages Sent: {{sent_msg|length}}</h1>
+                            <h1>Messages Sent: {{sent_msg.messages|length}}</h1>
                             <div class="uk-border-rounded">
-                                {% if sent_msg|length > 0 %}
-                                {% for msg in sent_msg %}
-                                    <button class="accordion uk-border-rounded">{{msg['recipient_first_name']}} {{msg['recipient_last_name']}} {{msg['sent_message'][0:15]}}   Time message sent: {{ msg['message_datetime']}}</button>
+                                {% if sent_msg.messages|length > 0 %}
+                                {% for msg in sent_msg.messages %}
+                                    <button class="accordion uk-border-rounded">{{sent_msg.first_name}} {{sent_msg.last_name}} {{msg.message[0:15]}}   Time message sent: {{ msg.updated_at}}</button>
                                     <div class="panel uk-border-rounded">
                                         <p>{{msg['sent_message']}}</p>
                                     </div>

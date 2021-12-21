@@ -24,11 +24,17 @@ def send_message():
         print("Your hostname:",log_data['hostname'])
         print("Your IP Address is:",log_data['ip_address'])
         return render_template("final_warning.html",log_info=log_data,user_info=results)
+    # end of code block identifying and logging out the hacker
     
     request_form = ImmutableMultiDict(request.form)
+    message = request_form['message']
     message_recipients = request_form.getlist('message_recipients')
     message_recipients = list(map(int, message_recipients))
     
+    if not validate_message( message_recipients, message):
+        session['message'] = message
+        return redirect("/user/dashboard")
+
     data = {
         'message':request.form['message'],
         'user_sender_id':request.form['sender_id'],
@@ -37,3 +43,15 @@ def send_message():
     Message.save_message(data)    
     
     return redirect("/user/dashboard")
+
+def validate_message (message_recipients, message):
+    is_valid = True
+    
+    if len(message) < 1 or message.isspace():
+        flash("Message is blank","send_message")
+        is_valid = False
+    if len(message_recipients)<1:
+        flash("No recipients selected","send_message")
+        is_valid = False
+    
+    return is_valid

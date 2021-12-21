@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request, redirect, session, flash# import the class from friend.py
 from flask_app.models.user import User
+from flask import flash
+import re
 from flask_app import app
 from flask_bcrypt import Bcrypt
 from werkzeug.datastructures import ImmutableMultiDict
+
+# create a regular expression object that we'll use later
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
 bcrypt = Bcrypt(app)
 
 @app.route("/")
@@ -17,9 +23,9 @@ def register():
     if user_with_email:
         flash("Email is invalid or unable", "register")
         return render_template("index.html")
-        
-    if not User.validate_user(request.form):
-        form_info = request.form
+
+    if not validate_user(request.form):
+        #form_info = request.form
         return render_template("index.html")
     
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
@@ -48,6 +54,7 @@ def login():
         return redirect("/")
 
     session['id'] = user.id
+    session['message'] = ""
 
     return redirect("/user/dashboard")
 
@@ -68,3 +75,38 @@ def show_user():
 def close_sessions():
     session.clear()
     return render_template("index.html")
+
+def validate_user( user ):
+        is_valid = True
+        # test whether a field matches the pattern
+        if len(user['fname']) < 1 or user['fname'].isspace():
+            flash("First name is blank","register")
+            is_valid = False
+        
+        if len(user['lname']) < 1 or user['lname'].isspace():
+            flash("Last name is blank","register")
+            is_valid = False
+        
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invalid email address!","register")
+            is_valid = False
+            
+        if len(user['password']) < 8 or user['password'].isspace():
+            flash("Password must be at least 8 characters","register")
+            is_valid = False
+        
+        caps_in_pw = re.findall("[A-Z]",user['password'])
+        nums_in_pw = re.findall("[0-9]",user['password'])
+        if len(caps_in_pw) < 0 or len(nums_in_pw) < 0:
+            flash("Password requires at least one capital letter and at least one number","register")
+            is_valid = False
+            
+        if len(user['confirmpassword']) < 1 or user['confirmpassword'].isspace():
+            flash("Confirm Password is blank","register")
+            is_valid = False
+        
+        if user['password'] != user['confirmpassword']:
+            flash("Passwords do not match","register")
+            is_valid = False
+        
+        return is_valid
